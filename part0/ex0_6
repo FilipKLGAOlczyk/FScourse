@@ -1,0 +1,16 @@
+sequenceDiagram
+    participant browser
+    participant server
+
+    Note right of browser: The user writes a note in the text field and clicks the Save button
+    Note right of browser: JavaScript event handler intercepts the form submission (preventing the default GET/POST reload)
+    Note right of browser: The new note is pushed to the local notes array and the browser re-renders the note list immediately
+
+    browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+    activate server
+    Note right of browser: Request header contains "Content-Type: application/json"<br/>Payload contains the new note: { "content": "SPA note", "date": "2026-07-10" }
+    Note left of server: The server receives the JSON payload and pushes the new note to its internal array
+    server-->>browser: HTTP 201 Created 
+    deactivate server
+
+    Note right of browser: The browser receives the success acknowledgment. No redirect happens, and no further files are fetched.
