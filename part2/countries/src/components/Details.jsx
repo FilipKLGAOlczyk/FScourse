@@ -1,4 +1,5 @@
 import Button from './Button';
+import Weather from './Weather'
 const Details = ({ country }) => {
   if (!country) {
     return null;
@@ -16,6 +17,10 @@ const Details = ({ country }) => {
         ))}
       </ul>
       <img src={country.flags.png} alt={`Flag of ${country.name.common}`} /> 
+      <br />
+      <div>
+        <Weather capital={country.capital[0]} />
+      </div>
       <br />
       <Button onClick={() =>
         window.location.reload()} text='Back' />
