@@ -24,12 +24,15 @@ const App = () => {
     setFilter(event.target.value)
   }
 
-
+  const handleShowDetails = (country) => {
+    setCountries([country]);
+    console.log('country', country);
+  }
 
   return (
     <div>
       <Filter filter={filter} handleFilterChange={handleFilterChange} />
-      <CountriesList countries={countries} filter={filter} />
+      <CountriesList countries={countries} filter={filter} handleShowDetails={handleShowDetails} />
     </div>
   )
 }

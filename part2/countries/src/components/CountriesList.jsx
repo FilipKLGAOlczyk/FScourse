@@ -1,4 +1,7 @@
-const CountriesList = ({ countries, filter }) => {
+import Button from './Button';
+import Details from './Details';
+
+const CountriesList = ({ countries, filter, handleShowDetails }) => {
   const filteredCountries = countries.filter(country =>
     country.name.common.toLowerCase().includes(filter.toLowerCase())
   );
@@ -8,24 +11,13 @@ const CountriesList = ({ countries, filter }) => {
   } else if (filteredCountries.length === 1) {
     const country = filteredCountries[0];
     return (
-      <div>
-        <h2>{country.name.common}</h2>
-        <p>Capital: {country.capital}</p>
-        <p>Area: {country.area}</p>
-        <h3>Languages:</h3>
-        <ul>
-          {Object.values(country.languages).map((language, index) => (
-            <li key={index}>{language}</li>
-          ))}
-        </ul>
-        <img src={country.flags.png} alt={`Flag of ${country.name.common}`} />
-      </div>
+      <Details country={country} />
     );
   } else {
     return (
       <ul>
         {filteredCountries.map(country => (
-          <li key={country.cca2}>{country.name.common}</li>
+          <li key={country.cca2}>{country.name.common} <Button onClick={() => handleShowDetails(country)} text='Show' /></li>
         ))}
       </ul>
     );
