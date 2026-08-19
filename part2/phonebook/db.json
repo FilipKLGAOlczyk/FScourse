@@ -14,11 +14,6 @@
       "name": "It Works",
       "number": "21376967",
       "id": "KzgsYL_2pBc"
-    },
-    {
-      "name": "Jano Deweloper",
-      "number": "12312111112",
-      "id": "_ZIdaF-N-OQ"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
