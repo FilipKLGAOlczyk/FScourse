@@ -23,17 +23,12 @@
     {
       "id": "QDwzVIQbnz8",
       "content": "no",
-      "important": true
+      "important": false
     },
     {
       "content": "",
-      "important": false,
+      "important": true,
       "id": "k5hkzYTjWvk"
-    },
-    {
-      "content": "nah",
-      "important": false,
-      "id": "gNM75zRt7_U"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
