@@ -3,6 +3,7 @@ import Filter from './components/Filter'
 import PersonsForm from './components/PersonsForm'
 import Persons from './components/Persons'
 import phonebookService from './services/phonebook'
+import Notification from './components/Notification'
 
 const App = () => {
   const [persons, setPersons] = useState([])
@@ -10,6 +11,7 @@ const App = () => {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [filter, setFilter] = useState('')
+  const [notificationMessage, setNotificationMessage] = useState(null)
 
   useEffect(() => {
     phonebookService.getAll()
@@ -48,11 +50,15 @@ const App = () => {
       return
     }
     if (persons.some(person => person.name === newName && person.number !== newNumber)) {
-      if (window.confirm(`${newName} is already added to phonebook, replace the old number with the new one?`)) {
+      if (window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)) {
         const personToUpdate = persons.find(p => p.name === newName)
         phonebookService.update(personToUpdate.id, { name: newName, number: newNumber })
           .then(returnedPerson => {
             setPersons(persons.map(p => p.id !== personToUpdate.id ? p : returnedPerson))
+            setNotificationMessage(`Updated ${returnedPerson.name}'s number in the phonebook`)
+            setTimeout(() => {
+              setNotificationMessage(null)
+            }, 5000)
             setNewName('')
             setNewNumber('')
           })
@@ -66,6 +72,10 @@ const App = () => {
     })
       .then(returnedPerson => {
         setPersons(persons.concat(returnedPerson))
+        setNotificationMessage(`Added ${returnedPerson.name}'s number to the phonebook`)
+        setTimeout(() => {
+          setNotificationMessage(null)
+        }, 5000)
         setNewName('')
         setNewNumber('')
       })
@@ -104,6 +114,7 @@ const App = () => {
       handleNumberChange={handleNumberChange} 
       handleSubmit={handleSubmit} />
     <div>
+      <Notification message={notificationMessage} />
       <h2>Numbers</h2>
     </div>
     <div>
