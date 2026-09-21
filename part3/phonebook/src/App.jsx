@@ -87,6 +87,12 @@ const App = () => {
         setNewName('')
         setNewNumber('')
       })
+      .catch(error => {
+        setNotificationMessage(`Error: ${error.response.data.error}`)
+        setTimeout(() => {
+          setNotificationMessage(null)
+        }, 5000)
+      })
   }
 
   const handleRemove = (id) => {
